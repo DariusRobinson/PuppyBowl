@@ -1,11 +1,12 @@
-import { fetchAllPlayers } from './ajaxHelpers'
-import { renderAllPlayers, renderNewPlayerForm } from './renderHelpers'
+import { fetchAllPlayers, fetchSinglePlayer } from './ajaxHelpers';
+import { renderAllPlayers, renderNewPlayerForm } from './renderHelpers';
 
 const init = async () => {
-  const players = await fetchAllPlayers()
-  renderAllPlayers(players)
+  const players = await fetchAllPlayers();
 
-  renderNewPlayerForm()
-}
+  renderAllPlayers(players);
 
-init()
+  renderNewPlayerForm();
+};
+
+init();
