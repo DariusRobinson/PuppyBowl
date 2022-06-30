@@ -6,10 +6,11 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     contentBase: path.resolve(__dirname, 'public'),
-    port: 8000
+    port: 8000,
   },
+  target: 'web',
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
-  }
-}
+    filename: 'bundle.js',
+  },
+};

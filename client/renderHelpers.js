@@ -2,6 +2,7 @@ import {
   fetchAllPlayers,
   fetchSinglePlayer,
   addNewPlayer,
+  removePlayer,
 } from './ajaxHelpers';
 
 const playerContainer = document.getElementById('all-players-container');
@@ -24,7 +25,8 @@ export const renderSinglePlayer = (playerObj) => {
       <img src="${playerObj.imageUrl}" alt="photo of ${
     playerObj.name
   } the puppy">
-      <button id="see-all">Back to all players</button>
+      <button id="see-all" class="sell-all btn">Back to all players</button>
+
     </div>
   `;
 
@@ -41,6 +43,7 @@ export const renderSinglePlayer = (playerObj) => {
 
 export const renderAllPlayers = (playerList) => {
   // First check if we have any data before trying to render it!
+
   if (!playerList || !playerList.length) {
     playerContainer.innerHTML = '<h3>No players to display!</h3>';
     return;
@@ -57,7 +60,8 @@ export const renderAllPlayers = (playerList) => {
           <p class="pup-number">#${pup.id}</p>
         </div>
         <img src="${pup.imageUrl}" alt="photo of ${pup.name} the puppy">
-        <button class="detail-button" data-id=${pup.id}>See details</button>
+        <button class="detail-button btn" data-id=${pup.id}>See details</button>
+        <button class="delete-button btn" data-id=${pup.id}>Remove</button>
       </div>
     `;
     playerContainerHTML += pupHTML;
@@ -80,6 +84,17 @@ export const renderAllPlayers = (playerList) => {
       const singlePlayer = await fetchSinglePlayer(dataID);
       console.log(singlePlayer);
       renderSinglePlayer(singlePlayer);
+    });
+  }
+
+  // remove functionality.
+  let deleteButtons = [...document.getElementsByClassName('delete-button')];
+  for (let i = 0; i < deleteButtons.length; i++) {
+    const button = deleteButtons[i];
+    button.addEventListener('click', async () => {
+      await removePlayer(button.dataset.id);
+      const players = await fetchAllPlayers();
+      renderAllPlayers(players);
     });
   }
 };
