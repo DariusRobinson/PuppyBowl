@@ -25,7 +25,7 @@ export const renderSinglePlayer = (playerObj) => {
       <img src="${playerObj.imageUrl}" alt="photo of ${
     playerObj.name
   } the puppy">
-      <button id="see-all" class="sell-all btn">Back to all players</button>
+      <button id="see-all" class="sell-all">Back to all players</button>
 
     </div>
   `;
